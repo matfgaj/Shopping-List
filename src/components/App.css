@@ -1,3 +1,11 @@
 body {
   text-align: center;
 }
+div.blurred {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  filter: blur(0.3px);
+  z-index: 2;
+  pointer-events: none;
+}

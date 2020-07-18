@@ -1,11 +1,16 @@
 import React from "react";
-import { ListGroup, Button } from "react-bootstrap";
 import "./ListItem.css";
+import { ListGroup, Button } from "react-bootstrap";
+
 const ListItem = (props) => {
   return (
-    <ListGroup.Item key={props.id} as="li">
+    <ListGroup.Item
+      //   className={!props.modalVisible ? null : "pointed"}
+      key={props.id}
+      as="li"
+    >
       <span>{props.name} </span>
-      <span>{props.amount}</span> <span>{props.unit ? "kg." : "szt."}</span>{" "}
+      <span>{props.amount}</span> <span>{!props.unit ? "kg." : "szt."}</span>{" "}
       <Button
         onClick={() => props.bought(props.id)}
         size="sm"
@@ -14,7 +19,7 @@ const ListItem = (props) => {
         Kupione
       </Button>{" "}
       <Button
-        onClick={() => props.editmodal(props.id)}
+        onClick={(e) => props.editmodal(e, props.id)}
         size="sm"
         variant="outline-warning"
       >

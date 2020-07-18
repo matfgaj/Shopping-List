@@ -127,7 +127,7 @@ class HeaderForm extends Component {
           <Col>
             <Button
               sm={2}
-              variant="dark"
+              variant="info"
               type="submit"
               onClick={this.handleSubmitClick}
             >

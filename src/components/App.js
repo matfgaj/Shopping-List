@@ -8,58 +8,109 @@ import ModalEditBox from "./ModalEditBox";
 class App extends React.Component {
   state = {
     list: [
+      { id: 1, name: "banany", category: "owoce", amount: 2, unit: true },
+      { id: 2, name: "jabłka", category: "owoce", amount: 6, unit: false },
+      { id: 3, name: "marchew", category: "warzywa", amount: 0.5, unit: false },
+      { id: 4, name: "mleko", category: "nabiał", amount: 1, unit: true },
+      { id: 5, name: "jogurt", category: "nabiał", amount: 3, unit: true },
+      { id: 6, name: "bułki", category: "pieczywo", amount: 4, unit: true },
+      { id: 7, name: "chleb", category: "pieczywo", amount: 1, unit: true },
+      { id: 8, name: "cola zero", category: "napoje", amount: 1, unit: true },
       {
-        id: 1,
-        name: "banany",
-        category: "artykuły higieniczne",
-        amount: 2,
-        unit: "szt",
+        id: 9,
+        name: "woda gazowana",
+        category: "napoje",
+        amount: 5,
+        unit: true,
       },
-      { id: 2, name: "banany", category: "owoce", amount: 2, unit: "szt" },
-      {
-        id: 3,
-        name: "banany",
-        category: "chemia domowa",
-        amount: 2,
-        unit: "szt",
-      },
-      { id: 4, name: "banany", category: "owoce", amount: 2, unit: "szt" },
-      { id: 5, name: "banany", category: "nabiał", amount: 2, unit: "szt" },
-      { id: 6, name: "banany", category: "owoce", amount: 2, unit: "szt" },
-      { id: 7, name: "banany", category: "owoce", amount: 2, unit: "szt" },
-      { id: 8, name: "banany", category: "owoce", amount: 2, unit: "szt" },
-      { id: 9, name: "banany", category: "nabiał", amount: 2, unit: "szt" },
       {
         id: 10,
-        name: "banany",
+        name: "pierogi",
+        category: "mrożonki",
+        amount: 0.3,
+        unit: false,
+      },
+      {
+        id: 11,
+        name: "truskawki",
+        category: "mrożonki",
+        amount: 1,
+        unit: false,
+      },
+      {
+        id: 12,
+        name: "pianka do golenia",
+        category: "kosmetyki",
+        amount: 1,
+        unit: true,
+      },
+      {
+        id: 13,
+        name: "szampon",
+        category: "kosmetyki",
+        amount: 1,
+        unit: true,
+      },
+      {
+        id: 14,
+        name: "płyn do naczyń",
+        category: "chemia domowa",
+        amount: 2,
+        unit: true,
+      },
+      {
+        id: 15,
+        name: "proszek do prania",
+        category: "chemia domowa",
+        amount: 0.7,
+        unit: false,
+      },
+      {
+        id: 16,
+        name: "domestos",
+        category: "chemia domowa",
+        amount: 2,
+        unit: true,
+      },
+      {
+        id: 17,
+        name: "papier",
         category: "artykuły higieniczne",
         amount: 2,
-        unit: "szt",
+        unit: true,
       },
-      { id: 11, name: "banany", category: "mrożonki", amount: 2, unit: "szt" },
-      { id: 12, name: "banany", category: "nabiał", amount: 2, unit: "szt" },
-      { id: 13, name: "banany", category: "owoce", amount: 2, unit: "szt" },
-      { id: 14, name: "banany", category: "owoce", amount: 2, unit: "szt" },
+      {
+        id: 18,
+        name: "waciki",
+        category: "artykuły higieniczne",
+        amount: 2,
+        unit: true,
+      },
+      { id: 19, name: "chipsy", category: "kupione", amount: 2, unit: true },
+      { id: 20, name: "sałata", category: "kupione", amount: 1, unit: false },
+      { id: 21, name: "jajka", category: "kupione", amount: 30, unit: true },
     ],
 
     displayedCategory: "owoce",
     modalVisible: false,
     unitPieces: true,
     editedElementId: null,
+    activeEditListItem: null,
 
     categories: [
       { id: 1, name: "owoce" },
       { id: 2, name: "warzywa" },
       { id: 3, name: "nabiał" },
       { id: 4, name: "pieczywo" },
-      { id: 5, name: "artykuły higieniczne" },
-      { id: 6, name: "chemia domowa" },
-      { id: 7, name: "słodycze" },
-      { id: 8, name: "mrożonki" },
-      { id: 9, name: "napoje" },
+      { id: 5, name: "napoje" },
+      { id: 6, name: "mrożonki" },
+      { id: 7, name: "kosmetyki" },
+      { id: 8, name: "chemia domowa" },
+      { id: 9, name: "artykuły higieniczne" },
       { id: 10, name: "kupione" },
     ],
   };
+
 
   handleNavbarClick = (e) => {
     const displayedCategory = e.target.textContent;
@@ -85,15 +136,26 @@ class App extends React.Component {
     });
   };
 
-  getEditId = (id) => {
-	this.setState({ modalVisible: true, editedElementId: id });
-
+  getEditId = (e, id) => {
+    this.setState({
+      activeEditListItem: e.target,
+      modalVisible: true,
+      editedElementId: id,
+    });
+    e.target.className = "pointed";
   };
-  
 
-    EditListItem = (editedList) => {
-      this.setState({ list: editedList });
-    };
+  EditListItem = (editedList) => {
+    const actual = this.state.activeEditListItem;
+    actual.className = "btn btn-outline-warning btn-sm";
+
+    this.setState({
+      activeEditListItem: null,
+      list: editedList,
+      modalVisible: false,
+      editedElementId: null,
+    });
+  };
 
   render() {
     return (
@@ -123,19 +185,25 @@ class App extends React.Component {
             ></ModalEditBox>
           ) : null}
         </div>
-        <div className="container">
-          <ListNavbar
-            click={this.handleNavbarClick}
-            categories={this.state.categories}
-          ></ListNavbar>
-        </div>
-        <div className="container">
-          <DisplayedList
-            category={this.state.displayedCategory}
-            list={this.state.list}
-            bought={this.handleBoughtButton}
-            editmodal={this.getEditId}
-          ></DisplayedList>
+        <div
+          id="navbar-list-container"
+          className={this.state.editedElementId ? "blurred" : null}
+        >
+          <div className="container">
+            <ListNavbar
+              click={this.handleNavbarClick}
+              categories={this.state.categories}
+            ></ListNavbar>
+          </div>
+          <div className="container">
+            <DisplayedList
+              modalVisible={this.state.modalVisible}
+              category={this.state.displayedCategory}
+              list={this.state.list}
+              bought={this.handleBoughtButton}
+              editmodal={this.getEditId}
+            ></DisplayedList>
+          </div>
         </div>
       </>
     );
