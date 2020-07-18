@@ -1,6 +1,6 @@
 import React from "react";
 import { ListGroup, Button } from "react-bootstrap";
-
+import "./ListItem.css";
 const ListItem = (props) => {
   return (
     <ListGroup.Item key={props.id} as="li">
@@ -12,7 +12,14 @@ const ListItem = (props) => {
         variant="outline-success"
       >
         Kupione
-      </Button>
+      </Button>{" "}
+      <Button
+        onClick={() => props.editmodal(props.id)}
+        size="sm"
+        variant="outline-warning"
+      >
+        Edytuj
+      </Button>{" "}
     </ListGroup.Item>
   );
 };

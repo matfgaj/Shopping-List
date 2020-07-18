@@ -26,11 +26,10 @@ class HeaderForm extends Component {
     });
   };
 
- 
   handleSwitch = () => {
     this.setState({ unitPieces: !this.state.unitPieces });
   };
-  
+
   handleSubmitClick = (e) => {
     e.preventDefault();
 
@@ -68,73 +67,75 @@ class HeaderForm extends Component {
 
   render() {
     return (
-      <Form>
-        <div value={this.state.validationMessage}>
-          {!this.state.validationMessage.length === 0
-            ? this.state.validationMessage.toString()
-            : this.state.validationMessage.join(" / ")}
-        </div>
-        <Form.Group as={Row}>
-          <Form.Label sm="2">Dodaj produkt do listy</Form.Label>
-          <Col sm={2}>
-            <Form.Control
-              value={this.state.name}
-              name="name"
-              id="name"
-              type="text"
-              placeholder="Nazwa produktu"
-              onChange={this.handleInput}
-            />
-          </Col>
-          <Col sm={2}>
-            <Form.Control
-              name="amount"
-              value={this.state.amount}
-              id="amount"
-              type="number"
-              placeholder="Ilość"
-              onChange={this.handleInput}
-            />
-          </Col>
-          <Col>
-            <Form.Check
-              name="unit"
-              type="switch"
-              id="unit-switch"
-              label={this.state.unitPieces ? "szt." : "kg."}
-              onClick={this.handleSwitch}
-            />
-          </Col>
-          <Col>
-            <Col>
-              <Form.Label>Wybierz kategorię</Form.Label>
+      <div className="Container">
+        <Form>
+          <div value={this.state.validationMessage}>
+            {!this.state.validationMessage.length === 0
+              ? this.state.validationMessage.toString()
+              : this.state.validationMessage.join(" / ")}
+          </div>
+          <Form.Group as={Row}>
+            <Form.Label sm="2">Dodaj produkt do listy</Form.Label>
+            <Col sm={2}>
+              <Form.Control
+                value={this.state.name}
+                name="name"
+                id="name"
+                type="text"
+                placeholder="Produkt"
+                onChange={this.handleInput}
+              />
             </Col>
-            <Form.Control
-              name="category"
-              value={this.state.category}
-              id="category-select"
+            <Col sm={2}>
+              <Form.Control
+                name="amount"
+                value={this.state.amount}
+                id="amount"
+                type="number"
+                placeholder="Ilość"
+                onChange={this.handleInput}
+              />
+            </Col>
+            <Col>
+              <Form.Check
+                name="unit"
+                type="switch"
+                id="unit-switch"
+                label={this.state.unitPieces ? "szt." : "kg."}
+                onClick={this.handleSwitch}
+              />
+            </Col>
+            <Col>
+              <Col>
+                <Form.Label>Wybierz kategorię</Form.Label>
+              </Col>
+              <Form.Control
+                name="category"
+                value={this.state.category}
+                id="category-select"
+                sm={2}
+                as="select"
+                onChange={this.handleInput}
+              >
+                <option value=""></option>
+                {this.props.categories.map((category) => (
+                  <option key={category.id}>{category.name}</option>
+                ))}
+              </Form.Control>
+            </Col>
+          </Form.Group>
+          <Col>
+            <Button
               sm={2}
-              as="select"
-              onChange={this.handleInput}
+              variant="dark"
+              type="submit"
+              onClick={this.handleSubmitClick}
             >
-              <option value=""></option>
-              {this.props.categories.map((category) => (
-                <option key={category.id}>{category.name}</option>
-              ))}
-            </Form.Control>
+              Dodaj
+            </Button>
           </Col>
-        </Form.Group>
-        <Col>
-          <Button
-            sm={2}
-            variant="dark"
-            type="submit"
-            onClick={this.handleSubmitClick}
-          >
-            Dodaj
-          </Button>
-        </Col>
-      </Form>
+        </Form>
+      </div>
     );
   }
 }

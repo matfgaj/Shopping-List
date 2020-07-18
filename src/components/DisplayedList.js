@@ -16,6 +16,7 @@ const DisplayedList = (props) => {
             unit={filteredelement.unit}
             as="li"
             bought={props.bought}
+            editmodal={props.editmodal}
           ></ListItem>
         ))}
     </ListGroup>
