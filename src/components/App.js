@@ -65,7 +65,7 @@ class App extends React.Component {
     e.preventDefault();
 
     this.setState((prevState) => ({
-	  list: [...prevState.list, newListElement],
+      list: [...prevState.list, newListElement],
     }));
   };
 

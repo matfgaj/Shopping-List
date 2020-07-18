@@ -13,6 +13,8 @@ class HeaderForm extends Component {
       unitPieces: true,
       category: "",
       newListElement: "",
+      isValidated: false,
+      validationMessage: [],
     };
   }
   handleName = (e) => {
@@ -30,6 +32,7 @@ class HeaderForm extends Component {
   };
 
   handleSwitch = () => {
+    this.formValidation();
     this.setState({ unitPieces: !this.state.unitPieces });
   };
   handleSelect = (e) => {
@@ -41,30 +44,48 @@ class HeaderForm extends Component {
 
   handleSubmitClick = (e) => {
     e.preventDefault();
-    const newListElement = {
-      id: this.props.list.length + 1,
-      name: this.state.name,
-      amount: this.state.amount,
-      unitPieces: this.state.unitPieces,
-      category: this.state.category,
-    };
 
-    this.props.addListElement(e, newListElement);
+    let validationMessage = [];
+    if (this.state.name === "")
+      validationMessage.push("nie podano nazwy produktu ");
+    if (this.state.amount === "0" || this.state.amount === 0)
+      validationMessage.push("nie podano ilości produktu ");
+    if (this.state.category === "")
+      validationMessage.push("nie wybrano kategorii ");
+    console.log(validationMessage);
+    if (validationMessage.length === 0) {
+      const newListElement = {
+        id: this.props.list.length + 1,
+        name: this.state.name,
+        amount: this.state.amount,
+        unitPieces: this.state.unitPieces,
+        category: this.state.category,
+      };
 
-    this.setState({
-      name: "",
-      amount: 0,
-      unitPieces: true,
-      category: "",
-      newListElement: "",
-    });
+      this.props.addListElement(e, newListElement);
+
+      this.setState({
+        name: "",
+        amount: 0,
+        unitPieces: true,
+        category: "",
+        newListElement: "",
+        validationMessage,
+      });
+    } else if (validationMessage.length >= 1) {
+      this.setState({ validationMessage });
+    }
   };
 
   render() {
     return (
       <Form>
+        <div value={this.state.validationMessage}>
+          {!this.state.validationMessage.length === 0
+            ? this.state.validationMessage.toString()
+            : this.state.validationMessage.join(" / ")}
+        </div>
         <h1>Lista zakupów</h1>
-        <div></div>
         <Form.Group as={Row}>
           <Form.Label sm="2">Dodaj produkt do listy</Form.Label>
           <Col sm={2}>
