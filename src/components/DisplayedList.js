@@ -15,6 +15,7 @@ const DisplayedList = (props) => {
             amount={filteredelement.amount}
             unit={filteredelement.unit}
             as="li"
+            bought={props.bought}
           ></ListItem>
         ))}
     </ListGroup>

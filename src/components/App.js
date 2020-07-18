@@ -69,6 +69,19 @@ class App extends React.Component {
     }));
   };
 
+  handleBoughtButton = (id) => {
+    console.log("change w stanie elementu o id " + id);
+    const list = Array.from(this.state.list);
+    list.forEach((element) => {
+      if (element.id === id) {
+        element.category = "kupione";
+      }
+    });
+    this.setState({
+      list,
+    });
+  };
+
   render() {
     return (
       <>
@@ -86,6 +99,7 @@ class App extends React.Component {
         <DisplayedList
           category={this.state.displayedCategory}
           list={this.state.list}
+          bought={this.handleBoughtButton}
         ></DisplayedList>
       </>
     );

@@ -6,7 +6,11 @@ const ListItem = (props) => {
     <ListGroup.Item key={props.id} as="li">
       <span>{props.name} </span>
       <span>{props.amount}</span> <span>{props.unit ? "kg." : "szt."}</span>{" "}
-      <Button size="sm" variant="outline-success">
+      <Button
+        onClick={() => props.bought(props.id)}
+        size="sm"
+        variant="outline-success"
+      >
         Kupione
       </Button>
     </ListGroup.Item>
