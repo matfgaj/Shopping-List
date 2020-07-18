@@ -1,5 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+import ListItem from "./ListItem";
 
 const DisplayedList = (props) => {
   return (
@@ -7,11 +8,14 @@ const DisplayedList = (props) => {
       {props.list
         .filter((element) => element.category === props.category)
         .map((filteredelement) => (
-          <ListGroup.Item key={filteredelement.id} as="li">
-            <span>{filteredelement.name} </span>
-            <span>{filteredelement.amount}</span>{" "}
-            <span>{filteredelement.unit ? "kg." : "szt."}</span>
-          </ListGroup.Item>
+          <ListItem
+            name={filteredelement.name}
+            key={filteredelement.id}
+            id={filteredelement.id}
+            amount={filteredelement.amount}
+            unit={filteredelement.unit}
+            as="li"
+          ></ListItem>
         ))}
     </ListGroup>
   );
