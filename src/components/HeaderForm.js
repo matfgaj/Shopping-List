@@ -17,31 +17,20 @@ class HeaderForm extends Component {
       validationMessage: [],
     };
   }
-  handleName = (e) => {
-    const name = e.target.value;
+
+  handleInput = (e) => {
+    const prop = e.target.name;
+    const val = e.target.value;
     this.setState({
-      name,
+      [prop]: val,
     });
   };
 
-  handleAmount = (e) => {
-    const amount = e.target.value;
-    this.setState({
-      amount,
-    });
-  };
-
+ 
   handleSwitch = () => {
-    this.formValidation();
     this.setState({ unitPieces: !this.state.unitPieces });
   };
-  handleSelect = (e) => {
-    const category = e.target.value;
-    this.setState({
-      category,
-    });
-  };
-
+  
   handleSubmitClick = (e) => {
     e.preventDefault();
 
@@ -85,29 +74,31 @@ class HeaderForm extends Component {
             ? this.state.validationMessage.toString()
             : this.state.validationMessage.join(" / ")}
         </div>
-        <h1>Lista zakupów</h1>
         <Form.Group as={Row}>
           <Form.Label sm="2">Dodaj produkt do listy</Form.Label>
           <Col sm={2}>
             <Form.Control
               value={this.state.name}
+              name="name"
               id="name"
               type="text"
               placeholder="Nazwa produktu"
-              onChange={this.handleName}
+              onChange={this.handleInput}
             />
           </Col>
           <Col sm={2}>
             <Form.Control
+              name="amount"
               value={this.state.amount}
               id="amount"
               type="number"
               placeholder="Ilość"
-              onChange={this.handleAmount}
+              onChange={this.handleInput}
             />
           </Col>
           <Col>
             <Form.Check
+              name="unit"
               type="switch"
               id="unit-switch"
               label={this.state.unitPieces ? "szt." : "kg."}
@@ -119,11 +110,12 @@ class HeaderForm extends Component {
               <Form.Label>Wybierz kategorię</Form.Label>
             </Col>
             <Form.Control
+              name="category"
               value={this.state.category}
               id="category-select"
               sm={2}
               as="select"
-              onChange={this.handleSelect}
+              onChange={this.handleInput}
             >
               <option value=""></option>
               {this.props.categories.map((category) => (
