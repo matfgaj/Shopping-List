@@ -20,14 +20,14 @@ To install app you need to run `npm install` in your terminal.
 
 ## Technologies/NPM's
 
-### React
-### Create React App
-### react-bootstrap
-### webpack
-### jsPDF
-### Babel
-### npm
-### localStorage features
+#### React
+#### Create React App
+#### react-bootstrap
+#### webpack
+#### jsPDF
+#### Babel
+#### npm
+#### localStorage features
 
 ## Description
 
