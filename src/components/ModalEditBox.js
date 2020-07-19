@@ -95,8 +95,11 @@ class ModalEditBox extends React.Component {
           </Col>
         </Form.Group>
         <Col>
-          <Button onClick={() => this.handleEditButton(this.props.editId)}>
-            Edytuj
+          <Button
+            variant="info"
+            onClick={() => this.handleEditButton(this.props.editId)}
+          >
+            Gotowe
           </Button>
         </Col>
       </Form>

@@ -6,13 +6,21 @@ const ListNavbar = (props) => {
   const onDragEnter = (e) => {
     props.getDropCategory(e.target.name);
   };
+  const dragLeave = (e) => {
+    e.preventDefault();
+
+    e.target.style.opacity = "1";
+  };
 
   const onDragOver = (e) => {
+    e.target.style.opacity = "0.3";
+
     props.getDropCategory(e.target.name);
     e.preventDefault();
   };
   const onDrop = (e) => {
     e.preventDefault();
+    e.target.style.opacity = "1";
 
     props.setDragDropCategory();
   };
@@ -20,10 +28,9 @@ const ListNavbar = (props) => {
   return (
     <Container>
       <Navbar
-        id="drop_zone"
-        onDrop={onDrop}
-        onDragOver={onDragOver}
         onDragEnter={onDragEnter}
+        onDrop={onDrop}
+        id="drop_zone"
         expand="lg"
         variant="light"
         bg="light"
@@ -31,11 +38,13 @@ const ListNavbar = (props) => {
         {props.categories.map((category) => {
           return (
             <Nav.Link
+              onDragOver={onDragOver}
+              onDragLeave={dragLeave}
               name={category.name}
               className={
                 props.displayedCategory === category.name
                   ? "pointedCategory"
-                  : null
+                  : "other"
               }
               onClick={props.click}
               key={category.id}

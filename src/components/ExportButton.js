@@ -8,7 +8,6 @@ const ExportButton = (props) => {
     doc.text(230, 100, "Lista Zakupów");
 
     const addCol = () => {
-    
       function compare(a, b) {
         if (a.category < b.category) {
           return -1;
@@ -19,13 +18,13 @@ const ExportButton = (props) => {
         return 0;
       }
       const list = props.list.sort(compare);
-	  let y = 150;
-      let x = 210;
+      let y = 150;
+      let x = 160;
 
       list.forEach((listItem) => {
         doc.text(x, y, listItem.name);
-        doc.text(x + 80, y, listItem.amount.toString());
-        doc.text(x + 120, y, listItem.unit === true ? "szt." : "kg.");
+        doc.text(x + 150, y, listItem.amount.toString());
+        doc.text(x + 190, y, listItem.unit === true ? "szt." : "kg.");
         y += 25;
       });
     };

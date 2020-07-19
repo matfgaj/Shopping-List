@@ -137,9 +137,9 @@ class App extends React.Component {
     return (
       <>
         {this.state.modalVisible === false ? (
-          <h1>Lista zakupów</h1>
+          <h1 className={"title"}>Lista zakupów</h1>
         ) : (
-          <h1>Edytuj produkt</h1>
+          <h1 className={"title"}>Edytuj produkt</h1>
         )}
         <div className="container">
           {!this.state.modalVisible ? (

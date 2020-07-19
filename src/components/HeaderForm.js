@@ -82,18 +82,20 @@ class HeaderForm extends Component {
               : this.state.validationMessage.join(" / ")}
           </div>
           <Form.Group as={Row}>
-            <Form.Label sm="2">Dodaj produkt do listy</Form.Label>
             <Col sm={2}>
+              <Form.Label sm="2">Dodaj produkt</Form.Label>
               <Form.Control
                 value={this.state.name}
                 name="name"
                 id="name"
                 type="text"
-                placeholder="Produkt"
+                placeholder="Nazwa"
                 onChange={this.handleInput}
               />
             </Col>
             <Col sm={2}>
+              <Form.Label sm="2">Ilość</Form.Label>
+
               <Form.Control
                 name="amount"
                 value={this.state.amount}
@@ -104,6 +106,7 @@ class HeaderForm extends Component {
               />
             </Col>
             <Col>
+              <Form.Label sm="2">Jednostka</Form.Label>
               <Form.Check
                 name="unit"
                 type="switch"
