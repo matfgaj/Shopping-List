@@ -2,13 +2,11 @@ import React from "react";
 import "./ListItem.css";
 import { ListGroup, Button } from "react-bootstrap";
 
+
+
 const ListItem = (props) => {
   return (
-    <ListGroup.Item
-      //   className={!props.modalVisible ? null : "pointed"}
-      key={props.id}
-      as="li"
-    >
+    <ListGroup.Item  key={props.id} as="li">
       <span>{props.name} </span>
       <span>{props.amount}</span> <span>{!props.unit ? "kg." : "szt."}</span>{" "}
       <Button
