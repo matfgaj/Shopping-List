@@ -122,6 +122,16 @@ class App extends React.Component {
   }
 
   render() {
+    const {
+      list,
+      displayedCategory,
+      modalVisible,
+      unitPieces,
+      activeEditListItem,
+      dragId,
+      categories,
+    } = this.state;
+
     return (
       <>
         {this.state.modalVisible === false ? (
@@ -133,33 +143,33 @@ class App extends React.Component {
           {!this.state.modalVisible ? (
             <HeaderForm
               addListElement={this.addListElement}
-              categories={this.state.categories}
-              list={this.state.list}
+              categories={categories}
+              list={list}
             ></HeaderForm>
           ) : null}
         </div>
         <div className="container">
-          {this.state.modalVisible ? (
+          {modalVisible ? (
             <ModalEditBox
               edit={this.EditListItem}
-              unitPieces={this.state.unitPieces}
-              categories={this.state.categories}
-              list={this.state.list}
-              editId={this.state.editedElementId}
+              unitPieces={unitPieces}
+              categories={categories}
+              list={list}
+              editId={editedElementId}
             ></ModalEditBox>
           ) : null}
         </div>
         <div
           id="navbar-list-container"
-          className={this.state.editedElementId ? "blurred" : null}
+          className={editedElementId ? "blurred" : null}
         >
           <div className="container">
             <ListNavbar
               setDragDropCategory={this.setDragDropCategory}
               getDropCategory={this.getDropCategory}
-              displayedCategory={this.state.displayedCategory}
               click={this.handleNavbarClick}
-              categories={this.state.categories}
+              displayedCategory={displayedCategory}
+              categories={categories}
             ></ListNavbar>
             <div
               className="container-summ-export
@@ -167,18 +177,18 @@ class App extends React.Component {
             >
               <Summary
                 deleteClick={this.deleteBoughtItems}
-                list={this.state.list}
+                list={list}
               ></Summary>
             </div>
           </div>
           <div className="container">
             <DisplayedList
               getDragId={this.getDragId}
-              modalVisible={this.state.modalVisible}
-              category={this.state.displayedCategory}
-              list={this.state.list}
               bought={this.handleBoughtButton}
               editmodal={this.getEditId}
+              modalVisible={modalVisible}
+              category={displayedCategory}
+              list={list}
             ></DisplayedList>
           </div>
         </div>
