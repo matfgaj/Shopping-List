@@ -9,20 +9,22 @@ import Summary from "./Summary";
 class App extends React.Component {
   state = {
     list: [
-      { id: 1, name: "banany", category: "owoce", amount: 1, unit: true },
-      { id: 2, name: "truskawki", category: "owoce", amount: 6.5, unit: false },
-      { id: 3, name: "marchew", category: "warzywa", amount: 1, unit: false },
-      { id: 4, name: "mleko", category: "nabiał", amount: 1, unit: true },
-      { id: 5, name: "jogurt", category: "nabiał", amount: 3, unit: true },
-      { id: 6, name: "ciasto", category: "pieczywo", amount: 4, unit: true },
-      { id: 7, name: "chleb", category: "pieczywo", amount: 1, unit: true },
-      { id: 8, name: "cola zero", category: "napoje", amount: 1, unit: true },
+      //   { id: 1, name: "banany", category: "owoce", amount: 1, unit: true },
+      //   { id: 2, name: "truskawki", category: "owoce", amount: 6.5, unit: false },
+      //   { id: 3, name: "marchew", category: "warzywa", amount: 1, unit: false },
+      //   { id: 4, name: "mleko", category: "nabiał", amount: 1, unit: true },
+      //   { id: 5, name: "jogurt", category: "nabiał", amount: 3, unit: true },
+      //   { id: 6, name: "ciasto", category: "pieczywo", amount: 4, unit: true },
+      //   { id: 7, name: "chleb", category: "pieczywo", amount: 1, unit: true },
+      //   { id: 8, name: "cola zero", category: "napoje", amount: 1, unit: true },
     ],
     displayedCategory: "owoce",
     modalVisible: false,
     unitPieces: true,
     editedElementId: null,
     activeEditListItem: null,
+    dragId: null,
+    dropCategory: null,
 
     categories: [
       { id: 1, name: "owoce" },
@@ -31,9 +33,7 @@ class App extends React.Component {
       { id: 4, name: "pieczywo" },
       { id: 5, name: "napoje" },
       { id: 6, name: "mrożonki" },
-      { id: 7, name: "kosmetyki" },
-      { id: 8, name: "chemia domowa" },
-      { id: 9, name: "artykuły higieniczne" },
+      { id: 8, name: "chemia" },
       { id: 10, name: "kupione" },
     ],
   };
@@ -90,6 +90,28 @@ class App extends React.Component {
     this.setState({ list });
   };
 
+  getDragId = (id) => {
+    this.setState({ dragId: id });
+  };
+
+  getDropCategory = (category) => {
+    this.setState({ dropCategory: category });
+  };
+
+  setDragDropCategory = () => {
+    console.log(this.state.list);
+    const list = Array.from(this.state.list);
+    list.forEach((element) => {
+      if (element.id === parseInt(this.state.dragId)) {
+        element.category = this.state.dropCategory;
+      }
+    });
+
+    this.setState({
+      list,
+    });
+  };
+
   componentWillMount() {
     localStorage.getItem("user") &&
       this.setState({ list: JSON.parse(localStorage.getItem("user")) });
@@ -133,6 +155,8 @@ class App extends React.Component {
         >
           <div className="container">
             <ListNavbar
+              setDragDropCategory={this.setDragDropCategory}
+              getDropCategory={this.getDropCategory}
               displayedCategory={this.state.displayedCategory}
               click={this.handleNavbarClick}
               categories={this.state.categories}
@@ -149,6 +173,7 @@ class App extends React.Component {
           </div>
           <div className="container">
             <DisplayedList
+              getDragId={this.getDragId}
               modalVisible={this.state.modalVisible}
               category={this.state.displayedCategory}
               list={this.state.list}

@@ -10,6 +10,7 @@ const DisplayedList = (props) => {
         .filter((element) => element.category === props.category)
         .map((filteredelement) => (
           <ListItem
+            getDragId={props.getDragId}
             modalVisible={props.modalVisible}
             name={filteredelement.name}
             key={filteredelement.id}

@@ -21,9 +21,16 @@ class HeaderForm extends Component {
   handleInput = (e) => {
     const prop = e.target.name;
     const val = e.target.value;
-    this.setState({
-      [prop]: val,
-    });
+    console.log(e.target.type);
+    if (e.target.type === "number") {
+      this.setState({
+        [prop]: parseInt(val),
+      });
+    } else {
+      this.setState({
+        [prop]: val,
+      });
+    }
   };
 
   handleSwitch = () => {
@@ -46,7 +53,7 @@ class HeaderForm extends Component {
         id: this.props.list.length + 1,
         name: this.state.name,
         amount: this.state.amount,
-        unitPieces: this.state.unitPieces,
+        unit: this.state.unitPieces,
         category: this.state.category,
       };
 
@@ -55,7 +62,7 @@ class HeaderForm extends Component {
       this.setState({
         name: "",
         amount: 0,
-        unitPieces: true,
+        unit: true,
         category: "",
         newListElement: "",
         validationMessage,
