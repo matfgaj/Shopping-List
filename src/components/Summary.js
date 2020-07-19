@@ -28,7 +28,7 @@ const Summary = (props) => {
       W sumie pozostało Ci do kupienia{" "}
       <strong>{summaryUnit(props.list)} sztuk</strong> oraz
       <strong> {summaryKg(props.list)} kg</strong> produktów.{" "}
-      {/* <ExportButton></ExportButton> */}{" "}
+      <ExportButton list={props.list}></ExportButton>{" "}
       <DeleteBoughItemsButton
         click={props.deleteClick}
       ></DeleteBoughItemsButton>
