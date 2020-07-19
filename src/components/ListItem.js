@@ -8,13 +8,20 @@ const ListItem = (props) => {
   };
 
   const dragStart = (e) => {
+    e.target.style.borderColor = "#aed9e0";
+
     props.getDragId(e.target.id);
+  };
+  const dragEnd = (e) => {
+    e.target.style.borderColor = "#ffa69e";
+    e.preventDefault();
   };
 
   return (
     <ListGroup.Item
       onClick={click}
       onDragStart={dragStart}
+      onDragEnd={dragEnd}
       draggable={true}
       key={props.id}
       id={props.id}
