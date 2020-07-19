@@ -83,6 +83,13 @@ class App extends React.Component {
     });
   };
 
+  deleteBoughtItems = () => {
+    const list = this.state.list.filter((listItem) => {
+      return listItem.category !== "kupione";
+    });
+    this.setState({ list });
+  };
+
   componentWillMount() {
     localStorage.getItem("user") &&
       this.setState({ list: JSON.parse(localStorage.getItem("user")) });
@@ -130,7 +137,15 @@ class App extends React.Component {
               click={this.handleNavbarClick}
               categories={this.state.categories}
             ></ListNavbar>
-            <Summary list={this.state.list}></Summary>
+            <div
+              className="container-summ-export
+			-delete	"
+            >
+              <Summary
+                deleteClick={this.deleteBoughtItems}
+                list={this.state.list}
+              ></Summary>
+            </div>
           </div>
           <div className="container">
             <DisplayedList

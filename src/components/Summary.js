@@ -1,5 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import ExportButton from "./ExportButton";
+import DeleteBoughItemsButton from "./DeleteBoughItemsButton";
 
 const Summary = (props) => {
   const summaryUnit = (list) => {
@@ -22,13 +24,15 @@ const Summary = (props) => {
     return summKg;
   };
   return (
-    <Card>
-      <Card.Body>
-        W sumie pozostało Ci do kupienia{" "}
-        <strong>{summaryUnit(props.list)} sztuk</strong> oraz
-        <strong> {summaryKg(props.list)} kg</strong> produktów.
-      </Card.Body>
-    </Card>
+    <Card.Body>
+      W sumie pozostało Ci do kupienia{" "}
+      <strong>{summaryUnit(props.list)} sztuk</strong> oraz
+      <strong> {summaryKg(props.list)} kg</strong> produktów.{" "}
+      {/* <ExportButton></ExportButton> */}{" "}
+      <DeleteBoughItemsButton
+        click={props.deleteClick}
+      ></DeleteBoughItemsButton>
+    </Card.Body>
   );
 };
 
