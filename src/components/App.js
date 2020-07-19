@@ -127,6 +127,8 @@ class App extends React.Component {
       displayedCategory,
       modalVisible,
       unitPieces,
+      editedElementId,
+      dropCategory,
       activeEditListItem,
       dragId,
       categories,

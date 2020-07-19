@@ -39,7 +39,7 @@ class ModalEditBox extends React.Component {
           : (element.unitPieces = element.unitPieces);
       }
     });
-    this.props.edit(list)
+    this.props.edit(list);
   };
 
   render() {
